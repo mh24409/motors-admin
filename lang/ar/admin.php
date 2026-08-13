@@ -16,6 +16,7 @@ return [
         'users' => 'المستخدمين',
         'roles' => 'الأدوار',
         'languages' => 'اللغات',
+        'global_settings' => 'الإعدادات العامة',
     ],
 
     // Dashboard
@@ -146,5 +147,22 @@ return [
     'profile' => [
         'name' => 'الاسم',
         'email' => 'البريد الإلكتروني',
+    ],
+
+    // Settings
+    'settings' => [
+        'general' => 'عام',
+        'site_name' => 'اسم الموقع',
+        'site_description' => 'وصف الموقع',
+        'branding' => 'العلامة التجارية',
+        'favicon' => 'أيقونة الموقع',
+        'header_logo' => 'شعار الرأس',
+        'footer_logo' => 'شعار التذييل',
+        'contact_social' => 'التواصل والشبكات الاجتماعية',
+        'contact_email' => 'البريد الإلكتروني للتواصل',
+        'contact_phone' => 'هاتف التواصل',
+        'facebook_url' => 'رابط فيسبوك',
+        'twitter_url' => 'رابط تويتر / X',
+        'instagram_url' => 'رابط إنستغرام',
     ],
 ];

@@ -16,6 +16,7 @@ return [
         'users' => 'Users',
         'roles' => 'Roles',
         'languages' => 'Languages',
+        'global_settings' => 'Global Settings',
     ],
 
     // Dashboard
@@ -146,5 +147,22 @@ return [
     'profile' => [
         'name' => 'Name',
         'email' => 'Email',
+    ],
+
+    // Settings
+    'settings' => [
+        'general' => 'General',
+        'site_name' => 'Site Name',
+        'site_description' => 'Site Description',
+        'branding' => 'Branding',
+        'favicon' => 'Favicon',
+        'header_logo' => 'Header Logo',
+        'footer_logo' => 'Footer Logo',
+        'contact_social' => 'Contact & Social',
+        'contact_email' => 'Contact Email',
+        'contact_phone' => 'Contact Phone',
+        'facebook_url' => 'Facebook URL',
+        'twitter_url' => 'Twitter URL',
+        'instagram_url' => 'Instagram URL',
     ],
 ];
