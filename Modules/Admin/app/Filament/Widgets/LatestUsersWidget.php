@@ -9,7 +9,7 @@ use Modules\Api\Models\User;
 
 class LatestUsersWidget extends BaseWidget
 {
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 2;
 
     protected int|string|array $columnSpan = 'full';
 

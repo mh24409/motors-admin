@@ -23,7 +23,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Modules\Admin\Filament\Pages\Dashboard;
 use Modules\Admin\Filament\Widgets\LatestUsersWidget;
 use Modules\Admin\Filament\Widgets\StatsOverviewWidget;
+use Modules\Admin\Filament\Widgets\SystemInfoWidget;
 use Modules\Admin\Filament\Widgets\UserRegistrationChart;
+use Modules\Admin\Filament\Widgets\UserStatusChart;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -46,6 +48,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->font('Inter')
             ->brandName('Motors Admin')
+            ->maxContentWidth(\Filament\Support\Enums\MaxWidth::Full)
             ->sidebarCollapsibleOnDesktop()
             ->navigationGroups([
                 NavigationGroup::make()
@@ -76,6 +79,8 @@ class AdminPanelProvider extends PanelProvider
                 StatsOverviewWidget::class,
                 UserRegistrationChart::class,
                 LatestUsersWidget::class,
+                UserStatusChart::class,
+                SystemInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
