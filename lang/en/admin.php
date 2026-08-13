@@ -1,0 +1,133 @@
+<?php
+
+return [
+    // Navigation Groups
+    'nav' => [
+        'admin_management' => 'Admin Management',
+        'access_control' => 'Access Control',
+        'user_management' => 'User Management',
+        'settings' => 'Settings',
+    ],
+
+    // Navigation Labels
+    'nav_labels' => [
+        'dashboard' => 'Dashboard',
+        'admins' => 'Admins',
+        'users' => 'Users',
+        'roles' => 'Roles',
+        'languages' => 'Languages',
+    ],
+
+    // Dashboard
+    'dashboard' => [
+        'title' => 'Dashboard',
+        'welcome' => 'Welcome back, :name',
+        'subtitle' => "Here's an overview of your application.",
+    ],
+
+    // Common Labels
+    'fields' => [
+        'name' => 'Name',
+        'email' => 'Email',
+        'phone' => 'Phone',
+        'password' => 'Password',
+        'password_confirmation' => 'Password Confirmation',
+        'roles' => 'Roles',
+        'is_active' => 'Active',
+        'status' => 'Status',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+        'registered' => 'Registered',
+        'verified' => 'Verified',
+        'id' => 'ID',
+        'sort_order' => 'Sort Order',
+    ],
+
+    // Admin Resource
+    'admin' => [
+        'label' => 'Admin',
+        'plural' => 'Admins',
+    ],
+
+    // User Resource
+    'user' => [
+        'label' => 'User',
+        'plural' => 'Users',
+        'section_info' => 'User Information',
+        'section_info_desc' => 'Manage user personal details.',
+        'section_security' => 'Security',
+        'section_security_desc' => 'Set or update the user password.',
+        'placeholder_name' => 'Enter full name',
+        'placeholder_email' => 'user@example.com',
+        'placeholder_phone' => '+1 234 567 8900',
+        'helper_inactive' => 'Inactive users cannot access the application.',
+        'placeholder_password' => 'Minimum 8 characters',
+        'placeholder_password_confirm' => 'Confirm password',
+        'email_copied' => 'Email copied',
+        'not_verified' => 'Not verified',
+        'activate' => 'Activate',
+        'deactivate' => 'Deactivate',
+        'user_activated' => 'User Activated',
+        'user_deactivated' => 'User Deactivated',
+        'activate_selected' => 'Activate Selected',
+        'deactivate_selected' => 'Deactivate Selected',
+        'filter_status' => 'Status',
+        'filter_active' => 'Active',
+        'filter_inactive' => 'Inactive',
+        'filter_verified' => 'Email Verified',
+        'filter_unverified' => 'Email Not Verified',
+    ],
+
+    // Language Resource
+    'language' => [
+        'label' => 'Language',
+        'plural' => 'Languages',
+        'section_details' => 'Language Details',
+        'section_status' => 'Status',
+        'code' => 'Code',
+        'code_placeholder' => 'en, ar, fr...',
+        'code_helper' => 'ISO 639 language code',
+        'name' => 'Name',
+        'name_placeholder' => 'English',
+        'native_name' => 'Native Name',
+        'native_name_placeholder' => 'العربية',
+        'direction' => 'Direction',
+        'direction_ltr' => 'Left to Right (LTR)',
+        'direction_rtl' => 'Right to Left (RTL)',
+        'flag' => 'Flag',
+        'flag_placeholder' => '🇺🇸',
+        'flag_helper' => 'Emoji flag',
+        'active' => 'Active',
+        'active_helper' => 'Active languages appear in the app language switcher',
+        'default' => 'Default Language',
+        'default_helper' => 'Only one language can be default. Setting this will unset the previous default.',
+        'set_default' => 'Set Default',
+        'default_set' => ':name is now the default language',
+        'cannot_deactivate_default' => 'Cannot deactivate default language',
+        'active_status' => 'Active Status',
+        'activate_selected' => 'Activate Selected',
+        'deactivate_selected' => 'Deactivate Selected',
+    ],
+
+    // Widgets
+    'widgets' => [
+        'total_admins' => 'Total Admins',
+        'system_administrators' => 'System administrators',
+        'total_users' => 'Total Users',
+        'registered_users' => 'Registered users',
+        'active_users' => 'Active Users',
+        'currently_active' => 'Currently active',
+        'inactive_users' => 'Inactive Users',
+        'deactivated_accounts' => 'Deactivated accounts',
+        'recent_users' => 'Recent Users',
+        'user_registrations' => 'User Registrations',
+        'user_registrations_desc' => 'Monthly user registrations over the last 6 months',
+        'registrations' => 'Registrations',
+    ],
+
+    // Profile
+    'profile' => [
+        'name' => 'Name',
+        'email' => 'Email',
+    ],
+];
