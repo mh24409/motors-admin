@@ -2,18 +2,26 @@
 
 namespace Modules\Admin\Filament\Pages;
 
-use App\Settings\GlobalSettings;
+use App\Models\GlobalSetting;
+use App\Models\Language;
 use Filament\Forms;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Pages\SettingsPage;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
 
-class GlobalSettingsPage extends SettingsPage
+class GlobalSettingsPage extends Page implements HasForms
 {
+    use InteractsWithForms;
+
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static string $settings = GlobalSettings::class;
-
     protected static ?int $navigationSort = 11;
+
+    protected static string $view = 'admin::filament.pages.global-settings';
+
+    public ?array $data = [];
 
     public static function getNavigationGroup(): ?string
     {
@@ -30,8 +38,49 @@ class GlobalSettingsPage extends SettingsPage
         return __('admin.nav_labels.global_settings');
     }
 
+    public function mount(): void
+    {
+        $setting = GlobalSetting::instance();
+        $languages = Language::active()->ordered()->get();
+
+        $data = $setting->only($setting->getFillable());
+
+        // Load translations keyed by language code
+        foreach ($languages as $language) {
+            $translation = $setting->translations()
+                ->where('language_id', $language->id)
+                ->first();
+
+            foreach ($setting->translatable as $field) {
+                $data["translations_{$language->code}_{$field}"] = $translation?->{$field};
+            }
+        }
+
+        $this->form->fill($data);
+    }
+
     public function form(Form $form): Form
     {
+        $languages = Language::active()->ordered()->get();
+
+        // Build language tabs for translatable fields
+        $languageTabs = [];
+        foreach ($languages as $language) {
+            $label = trim("{$language->flag} {$language->native_name}");
+            $code = $language->code;
+
+            $languageTabs[] = Forms\Components\Tabs\Tab::make($label)
+                ->icon('heroicon-m-language')
+                ->schema([
+                    Forms\Components\TextInput::make("translations_{$code}_site_name")
+                        ->label(__('admin.settings.site_name') . " ({$code})")
+                        ->required($language->is_default),
+                    Forms\Components\Textarea::make("translations_{$code}_site_description")
+                        ->label(__('admin.settings.site_description') . " ({$code})")
+                        ->rows(3),
+                ]);
+        }
+
         return $form
             ->schema([
                 Forms\Components\Tabs::make('Settings')
@@ -40,28 +89,7 @@ class GlobalSettingsPage extends SettingsPage
                             ->icon('heroicon-o-information-circle')
                             ->schema([
                                 Forms\Components\Tabs::make('Translations')
-                                    ->tabs([
-                                        Forms\Components\Tabs\Tab::make('English')
-                                            ->icon('heroicon-m-language')
-                                            ->schema([
-                                                Forms\Components\TextInput::make('site_name.en')
-                                                    ->label(__('admin.settings.site_name') . ' (EN)')
-                                                    ->required(),
-                                                Forms\Components\Textarea::make('site_description.en')
-                                                    ->label(__('admin.settings.site_description') . ' (EN)')
-                                                    ->rows(3),
-                                            ]),
-                                        Forms\Components\Tabs\Tab::make('العربية')
-                                            ->icon('heroicon-m-language')
-                                            ->schema([
-                                                Forms\Components\TextInput::make('site_name.ar')
-                                                    ->label(__('admin.settings.site_name') . ' (AR)')
-                                                    ->required(),
-                                                Forms\Components\Textarea::make('site_description.ar')
-                                                    ->label(__('admin.settings.site_description') . ' (AR)')
-                                                    ->rows(3),
-                                            ]),
-                                    ]),
+                                    ->tabs($languageTabs),
                             ]),
                         Forms\Components\Tabs\Tab::make(__('admin.settings.branding'))
                             ->icon('heroicon-o-paint-brush')
@@ -103,6 +131,42 @@ class GlobalSettingsPage extends SettingsPage
                             ]),
                     ])
                     ->columnSpanFull(),
-            ]);
+            ])
+            ->statePath('data');
+    }
+
+    public function save(): void
+    {
+        $data = $this->form->getState();
+        $setting = GlobalSetting::instance();
+        $languages = Language::active()->ordered()->get();
+
+        // Save non-translatable fields
+        $setting->update([
+            'favicon' => $data['favicon'] ?? null,
+            'header_logo' => $data['header_logo'] ?? null,
+            'footer_logo' => $data['footer_logo'] ?? null,
+            'contact_email' => $data['contact_email'] ?? null,
+            'contact_phone' => $data['contact_phone'] ?? null,
+            'facebook_url' => $data['facebook_url'] ?? null,
+            'twitter_url' => $data['twitter_url'] ?? null,
+            'instagram_url' => $data['instagram_url'] ?? null,
+        ]);
+
+        // Save translations per language
+        foreach ($languages as $language) {
+            $translationData = [];
+            foreach ($setting->translatable as $field) {
+                $key = "translations_{$language->code}_{$field}";
+                $translationData[$field] = $data[$key] ?? null;
+            }
+
+            $setting->setTranslation($language->id, $translationData);
+        }
+
+        Notification::make()
+            ->title(__('admin.settings.saved'))
+            ->success()
+            ->send();
     }
 }

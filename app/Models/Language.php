@@ -38,6 +38,14 @@ class Language extends Model
     }
 
     /**
+     * Scope: order by sort_order.
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('sort_order');
+    }
+
+    /**
      * Get the default language.
      */
     public static function getDefault(): ?self

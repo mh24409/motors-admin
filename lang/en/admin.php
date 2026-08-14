@@ -164,5 +164,7 @@ return [
         'facebook_url' => 'Facebook URL',
         'twitter_url' => 'Twitter URL',
         'instagram_url' => 'Instagram URL',
+        'save' => 'Save changes',
+        'saved' => 'Settings saved successfully',
     ],
 ];
