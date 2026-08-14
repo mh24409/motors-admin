@@ -97,14 +97,17 @@ class GlobalSettingsPage extends Page implements HasForms
                                 Forms\Components\FileUpload::make('favicon')
                                     ->label(__('admin.settings.favicon'))
                                     ->image()
+                                    ->disk('public')
                                     ->directory('settings'),
                                 Forms\Components\FileUpload::make('header_logo')
                                     ->label(__('admin.settings.header_logo'))
                                     ->image()
+                                    ->disk('public')
                                     ->directory('settings'),
                                 Forms\Components\FileUpload::make('footer_logo')
                                     ->label(__('admin.settings.footer_logo'))
                                     ->image()
+                                    ->disk('public')
                                     ->directory('settings'),
                             ]),
                         Forms\Components\Tabs\Tab::make(__('admin.settings.contact_social'))
@@ -163,6 +166,9 @@ class GlobalSettingsPage extends Page implements HasForms
 
             $setting->setTranslation($language->id, $translationData);
         }
+
+        // Re-fill form with persisted data so file previews resolve
+        $this->mount();
 
         Notification::make()
             ->title(__('admin.settings.saved'))
