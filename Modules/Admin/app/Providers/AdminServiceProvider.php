@@ -9,6 +9,8 @@ use Modules\Admin\Http\Livewire\LanguageSwitcher;
 use Modules\Admin\Models\Admin;
 use Modules\Admin\Policies\UserPolicy;
 use Modules\Api\Models\User;
+use App\Models\Language;
+use Spatie\Permission\Models\Role;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -50,6 +52,9 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerPolicies(): void
     {
         Gate::policy(User::class, UserPolicy::class);
+        Gate::policy(Admin::class, \Modules\Admin\Policies\AdminPolicy::class);
+        Gate::policy(Language::class, \App\Policies\LanguagePolicy::class);
+        Gate::policy(Role::class, \App\Policies\RolePolicy::class);
     }
 
     /**

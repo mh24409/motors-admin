@@ -5,9 +5,11 @@ namespace Modules\Admin\Filament\Widgets;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Carbon;
 use Modules\Api\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class UserRegistrationChart extends ChartWidget
 {
+    use HasWidgetShield;
     protected static ?int $sort = 2;
 
     protected static ?string $maxHeight = '300px';

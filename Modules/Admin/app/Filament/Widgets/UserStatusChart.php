@@ -4,9 +4,11 @@ namespace Modules\Admin\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
 use Modules\Api\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class UserStatusChart extends ChartWidget
 {
+    use HasWidgetShield;
     protected static ?int $sort = 3;
 
     protected static ?string $maxHeight = '300px';

@@ -6,9 +6,11 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Modules\Api\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class LatestUsersWidget extends BaseWidget
 {
+    use HasWidgetShield;
     protected static ?int $sort = 2;
 
     protected int|string|array $columnSpan = 'full';

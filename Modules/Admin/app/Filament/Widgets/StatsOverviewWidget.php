@@ -7,9 +7,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Carbon;
 use Modules\Admin\Models\Admin;
 use Modules\Api\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class StatsOverviewWidget extends BaseWidget
 {
+    use HasWidgetShield;
     protected static ?int $sort = 1;
 
     protected function getStats(): array

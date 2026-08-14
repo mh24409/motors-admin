@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\DB;
 use Modules\Admin\Models\Admin;
 use Modules\Api\Models\User;
 use Spatie\Permission\Models\Role;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
 class SystemInfoWidget extends Widget
 {
+    use HasWidgetShield;
     protected static ?int $sort = 5;
 
     protected static string $view = 'admin::widgets.system-info';
