@@ -64,7 +64,7 @@ class AdminResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('roles')
                     ->label(__('admin.fields.roles'))
-                    ->relationship('roles', 'name')
+                    ->relationship('roles', 'name', modifyQueryUsing: fn (Builder $query) => $query->where('name', '!=', 'super_admin'))
                     ->multiple()
                     ->preload()
                     ->searchable(),

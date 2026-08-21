@@ -4,6 +4,7 @@ namespace Modules\Api\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Api\Http\Middleware\SetLanguage;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,9 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         parent::boot();
+
+        Route::aliasMiddleware('setLanguage', SetLanguage::class);
+
     }
 
     /**
@@ -32,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::middleware('api')
+        Route::middleware(['api', 'setLanguage'])
             ->prefix('api')
             ->group(module_path($this->name, '/routes/api.php'));
     }
